@@ -88,7 +88,7 @@ def afterlogin_view(request):
         if accountapproval:
             return redirect('mechanic-dashboard')
         else:
-            return render(request,'vehicle/mechanic_wait_for_approval.html')
+            return render(request,'vehicle/ef_wait_for_approval.html')
     else:
         return redirect('admin-dashboard')
 
@@ -254,7 +254,7 @@ def admin_add_mechanic_view(request):
             return HttpResponseRedirect('admin-view-mechanic')
         else:
             print('problem in form')
-    return render(request,'vehicle/admin_add_mechanic.html',context=mydict)
+    return render(request,'vehicle/admin_add_ef.html',context=mydict)
 
 
 @login_required(login_url='adminlogin')
@@ -288,12 +288,12 @@ def update_mechanic_view(request,pk):
             user.save()
             mechanicForm.save()
             return redirect('admin-view-mechanic')
-    return render(request,'vehicle/update_mechanic.html',context=mydict)
+    return render(request,'vehicle/update_efhtml',context=mydict)
 
 @login_required(login_url='adminlogin')
 def admin_view_mechanic_salary_view(request):
     mechanics=models.Mechanic.objects.all()
-    return render(request,'vehicle/ab_view_mechanic_salary.html',{'mechanics':mechanics})
+    return render(request,'vehicle/ab_view_ef_salary.html',{'mechanics':mechanics})
 
 @login_required(login_url='adminlogin')
 def update_salary_view(request,pk):
@@ -639,14 +639,14 @@ def mechanic_dashboard_view(request):
     'salary':mechanic.salary,
     'mechanic':mechanic,
     }
-    return render(request,'vehicle/mechanic_dashboard.html',context=dict)
+    return render(request,'vehicle/ef_dashboard.html',context=dict)
 
 @login_required(login_url='mechaniclogin')
 @user_passes_test(is_mechanic)
 def mechanic_work_assigned_view(request):
     mechanic=models.Mechanic.objects.get(user_id=request.user.id)
     works=models.Request.objects.all().filter(mechanic_id=mechanic.id)
-    return render(request,'vehicle/mechanic_work_assigned.html',{'works':works,'mechanic':mechanic})
+    return render(request,'vehicle/ef_work_assigned.html',{'works':works,'mechanic':mechanic})
 
 
 @login_required(login_url='mechaniclogin')
@@ -663,14 +663,14 @@ def mechanic_update_status_view(request,pk):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/mechanic-work-assigned')
-    return render(request,'vehicle/mechanic_update_status.html',{'updateStatus':updateStatus,'mechanic':mechanic})
+    return render(request,'vehicle/ef_update_status.html',{'updateStatus':updateStatus,'mechanic':mechanic})
 
 @login_required(login_url='mechaniclogin')
 @user_passes_test(is_mechanic)
 def mechanic_attendance_view(request):
     mechanic=models.Mechanic.objects.get(user_id=request.user.id)
     attendaces=models.Attendance.objects.all().filter(mechanic=mechanic)
-    return render(request,'vehicle/mechanic_view_attendance.html',{'attendaces':attendaces,'mechanic':mechanic})
+    return render(request,'vehicle/ef_view_attendance.html',{'attendaces':attendaces,'mechanic':mechanic})
 
 
 
@@ -688,20 +688,20 @@ def mechanic_feedback_view(request):
         else:
             print("form is invalid")
         return render(request,'vehicle/feedback_sent.html',{'mechanic':mechanic})
-    return render(request,'vehicle/mechanic_feedback.html',{'feedback':feedback,'mechanic':mechanic})
+    return render(request,'vehicle/ef_feedback.html',{'feedback':feedback,'mechanic':mechanic})
 
 @login_required(login_url='mechaniclogin')
 @user_passes_test(is_mechanic)
 def mechanic_salary_view(request):
     mechanic=models.Mechanic.objects.get(user_id=request.user.id)
     workdone=models.Request.objects.all().filter(mechanic_id=mechanic.id).filter(Q(status="Repairing Done") | Q(status="Released"))
-    return render(request,'vehicle/mechanic_salary.html',{'workdone':workdone,'mechanic':mechanic})
+    return render(request,'vehicle/ef_salary.html',{'workdone':workdone,'mechanic':mechanic})
 
 @login_required(login_url='mechaniclogin')
 @user_passes_test(is_mechanic)
 def mechanic_profile_view(request):
     mechanic=models.Mechanic.objects.get(user_id=request.user.id)
-    return render(request,'vehicle/mechanic_profile.html',{'mechanic':mechanic})
+    return render(request,'vehicle/ef_profile.html',{'mechanic':mechanic})
 
 @login_required(login_url='mechaniclogin')
 @user_passes_test(is_mechanic)
@@ -720,7 +720,7 @@ def edit_mechanic_profile_view(request):
             user.save()
             mechanicForm.save()
             return redirect('mechanic-profile')
-    return render(request,'vehicle/edit_mechanic_profile.html',context=mydict)
+    return render(request,'vehicle/edit_ef_profile.html',context=mydict)
 
 
 
