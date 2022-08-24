@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.db.models import Q
 
+from .models import jobs, insurance_scheme
+
+
 def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -749,3 +752,28 @@ def contactus_view(request):
             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
             return render(request, 'vehicle/contactussuccess.html')
     return render(request, 'vehicle/contactus.html', {'form':sub})
+
+
+def jb_addjob(request):
+    if request.method == "POST":
+        jbtitle = request.POST.get('jbtitle')
+        jbplace = request.POST.get('jbplace')
+        jbdate = request.POST.get('jbdate')
+        jbname = request.POST.get('jbname')
+        jbdes = request.POST.get('jbdes')
+        jbno = request.POST.get('jbno')
+
+        jobs(jbtitle=jbtitle, jbplace=jbplace, jbdate=jbdate, jbdes=jbdes, jbname=jbname, jbno=jbno).save()
+    return render(request, 'vehicle/jb_addjob.html')
+
+def add_scheme(request):
+    if request.method == "POST":
+        policyno = request.POST.get('policyno')
+        insurancetype= request.POST.get('insurancetype')
+        company = request.POST.get('company')
+        timelength = request.POST.get('timelength')
+        policyDescription = request.POST.get('policyDescription')
+        insuranceamount = request.POST.get('insuranceamount')
+
+        insurance_scheme(policyno=policyno,insurancetype=insurancetype,company=company,timelength=timelength,policyDescription=policyDescription,insuranceamount=insuranceamount).save()
+    return render(request,'add_scheme.html')

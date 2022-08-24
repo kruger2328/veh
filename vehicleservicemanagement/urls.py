@@ -94,4 +94,9 @@ urlpatterns = [
 
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
+
+    path('jb_addjob/',views.jb_addjob,name="vehicle/jb_addjob"),
+    path('add_scheme/',views.add_scheme,name="add_scheme"),
+
+
 ]
