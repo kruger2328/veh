@@ -79,3 +79,23 @@ class Feedback(models.Model):
     date=models.DateField(auto_now=True)
     by=models.CharField(max_length=40)
     message=models.CharField(max_length=500)
+
+
+
+class jobs(models.Model):
+    jbtitle=models.CharField(max_length=200,null=True)
+    jbplace=models.CharField(max_length=200,null=True)
+    jbdate=models.CharField(max_length=200,null=True)
+    jbname=models.CharField(max_length=200,null=True)
+    jbdes=models.CharField(max_length=200,null=True)
+    jbno=models.CharField(max_length=200,null=True)
+
+
+class insurance_scheme(models.Model):
+    policyno= models.CharField(max_length=200, null=True)
+    insurancetype= models.CharField(max_length=200, null=True)
+    company= models.CharField(max_length=200, null=True)
+    policyDescription= models.CharField(max_length=200, null=True)
+    timelength= models.CharField(max_length=200, null=True)
+    insuranceamount= models.CharField(max_length=200, null=True)
+

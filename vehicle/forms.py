@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from . import models
+from .models import jobs
+
 
 class CustomerUserForm(forms.ModelForm):
     class Meta:
@@ -84,3 +86,34 @@ class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)
     Email = forms.EmailField()
     Message = forms.CharField(max_length=500,widget=forms.Textarea(attrs={'rows': 3, 'cols': 30}))
+
+
+
+class addjob(forms.ModelForm):
+        class Meta:
+            model = jobs
+            fields = ('jbtitle', 'jbplace', 'jbdate', 'jbname', 'jbdes', 'jbno')
+            widigets = {
+
+                'jbtitle': forms.TextInput(attrs={'class': 'form-control'}),
+                'jbplace': forms.TextInput(attrs={'class': 'form-control'}),
+                'jbdate': forms.TextInput(attrs={'class': 'forms-control'}),
+                'jbname': forms.TextInput(attrs={'class': 'forms-control'}),
+                'jbdes': forms.TextInput(attrs={'class': 'form-control'}),
+                'jbno': forms.TextInput(attrs={'class': 'forms-control'}),}
+
+
+class addjob(forms.ModelForm):
+    class Meta:
+        model = jobs
+        fields = ('jbtitle', 'jbplace', 'jbdate', 'jbname', 'jbdes', 'jbno')
+        widigets = {
+
+            'jbtitle': forms.TextInput(attrs={'class': 'form-control'}),
+            'jbplace': forms.TextInput(attrs={'class': 'form-control'}),
+            'jbdate': forms.TextInput(attrs={'class': 'forms-control'}),
+            'jbname': forms.TextInput(attrs={'class': 'forms-control'}),
+            'jbdes': forms.TextInput(attrs={'class': 'form-control'}),
+            'jbno': forms.TextInput(attrs={'class': 'forms-control'}),
+
+        }
